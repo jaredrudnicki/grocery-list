@@ -13,23 +13,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 //import $ from 'jquery';
 //import Popper from 'popper.js';
 
-const shops = [
-  {
-    name: 'petes coffee',
-    menu: {
-      latte: 5,
-      espresso: 5
-    }
-  },
-  {
-    name: 'starbucks',
-    menu: {
-      latte: 3,
-      espresso: 3
-    }
-  }
-]
-
 const section1 = ["apples", "bananas", "grapes", "onions", "lettuce", "spinach"]
 const section2 = ["chicken", "steak", "pork", "brisket"]
 const section3 = ["shredded cheese", "butter", "eggs", "sour cream"]
@@ -79,20 +62,6 @@ function FoodItem(props) {
   )
 }
 
-function CoffeeShop(props) {
-  const { name, latte, espresso } = props;
-  return (
-    <div id={name}>
-      <h1 id={name}>{name}</h1>
-      <p>latte: {latte}</p>
-      <p>espresso: {espresso}</p>
-      <hr />
-    </div>
-  )
-
-}
-
-
 function App() {
   //var myHeaders = new Headers();
   //myHeaders.append("Authorization", "Token ffbe36852c8f3ce3e01b72301fb15f8e48a26a1b");
@@ -123,18 +92,12 @@ function App() {
 
 
 
-
-  const [list, setList] = React.useState(shops);
   const [produceSection] = React.useState(section1);
   const [meatSection] = React.useState(section2);
   const [dairySection] = React.useState(section3);
 
   const [shoppingItem, setShoppingItem] = React.useState('');
   const [groceryList, setGroceryList] = React.useState([]);
-  //change to axios call to get Coffee Shops
-  //const [shopName, setShopName] = React.useState('');
-  //const [lattePrice, setLattePrice] = React.useState('');
-  //const [espressoPrice, setEspressoPrice] = React.useState('');
 
   function getSectionPage(event) {
     event.preventDefault();
@@ -160,7 +123,6 @@ function App() {
   }
 
   useEffect(() => {
-    setList(shops);
     var requestOptions = {
       method: 'GET',
       //headers: myHeaders,
@@ -234,10 +196,6 @@ function App() {
 
   return (
     <Container>
-      <Row>
-        <FoodItem name='salmon' id='33' section='meat' />
-      </Row>
-
       <div>
         <DropdownButton id="dropdown-basic-button" title="Grocery Section">
           <Dropdown.Item href="" onClick={getSectionPage}>all</Dropdown.Item>
@@ -247,24 +205,14 @@ function App() {
           <Dropdown.Item href="misc-section" onClick={getSectionPage}>misc</Dropdown.Item>
         </DropdownButton>
         {Object.keys(groceryList).map(key => {
-          return <FoodItem name={groceryList[key].item} id={groceryList[key].id} section={groceryList[key].section} />
+          return <div key={groceryList[key].id}>
+            <FoodItem name={groceryList[key].item} id={groceryList[key].id} section={groceryList[key].section} />
+          </div>
         })}
 
-        {list.map((coffeeshop) => {
-          return (
-            <CoffeeShop name={coffeeshop.name} latte={coffeeshop.menu.latte} espresso={coffeeshop.menu.espresso} />
-          )
-        })}
         <form>
           <label>add grocery item</label>
           <input type='text' value={shoppingItem} id='shoppingItem' onChange={handleChange}></input>
-          {/*<label>shop-name</label> <br />
-        <input type='text' value={shopName} id='shopNameInput' onChange={handleChange}></input><br />
-        <label>latte price</label><br />
-        <input type='text' value={lattePrice} id='lattePriceInput' onChange={handleChange}></input><br />
-        <label>espresso price</label><br />
-        <input type='text' value={espressoPrice} id='espressoPriceInput' onChange={handleChange}></input><br />
-        */}
           <input type='submit' id='btnSubmit' onClick={handleAdd}></input><br />
         </form>
       </div>
