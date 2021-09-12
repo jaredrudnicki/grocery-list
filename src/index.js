@@ -5,7 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import './index.css'
 
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
@@ -31,7 +31,7 @@ const shops = [
 ]
 
 const section1 = ["apples", "bananas", "grapes", "onions", "lettuce", "spinach"]
-const section2 = ["chicken", "steak", ,"pork", "brisket"]
+const section2 = ["chicken", "steak", , "pork", "brisket"]
 const section3 = ["shredded cheese", "butter", "eggs", "sour cream"]
 
 
@@ -62,10 +62,10 @@ const section3 = ["shredded cheese", "butter", "eggs", "sour cream"]
 }*/
 
 function FoodItem(props) {
-  const {name, id, section} = props;
+  const { name, id, section } = props;
 
   function handleDelete(event) {
-    fetch('http://localhost:8000/groceryList/' + id, {
+    fetch('https://jr-grocery-list.herokuapp.com/groceryList/' + id, {
       method: 'DELETE',
     })
     window.location.reload();
@@ -74,20 +74,20 @@ function FoodItem(props) {
   return (
     <Row>
       <Col><p>{section}: {name}</p></Col>
-      <Col xs={8}><CloseButton onClick={handleDelete}/></Col>
+      <Col xs={8}><CloseButton onClick={handleDelete} /></Col>
     </Row>
   )
 }
 
 function CoffeeShop(props) {
-  const {name, latte, espresso} = props;
+  const { name, latte, espresso } = props;
   return (
-  <div id={name}>
-    <h1 id={name}>{name}</h1>
-    <p>latte: {latte}</p>
-    <p>espresso: {espresso}</p>
-    <hr />
-  </div>
+    <div id={name}>
+      <h1 id={name}>{name}</h1>
+      <p>latte: {latte}</p>
+      <p>espresso: {espresso}</p>
+      <hr />
+    </div>
   )
 
 }
@@ -98,7 +98,7 @@ function App() {
   //myHeaders.append("Authorization", "Token ffbe36852c8f3ce3e01b72301fb15f8e48a26a1b");
   //myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
   //myHeaders.append("Cookie", "csrftoken=eIG0BPZIJTrVLfqhWYlaB4TpyMDKCZRgKGMAihOcA8zGglO4YkrpvWqepuQrjeWg");
-  
+
   var requestOptions = {
     method: 'GET',
     //headers: myHeaders,
@@ -106,13 +106,13 @@ function App() {
   };
 
   function getSection(item) {
-    if(produceSection.includes(item)) {
+    if (produceSection.includes(item)) {
       console.log('produce');
       return 'produce';
-    } else if(meatSection.includes(item)) {
+    } else if (meatSection.includes(item)) {
       console.log('meat');
       return 'meat';
-    } else if(dairySection.includes(item)) {
+    } else if (dairySection.includes(item)) {
       console.log('dairy');
       return 'dairy';
     } else {
@@ -121,14 +121,14 @@ function App() {
     }
   }
 
-  
-  
-  
+
+
+
   const [list, setList] = React.useState(shops);
   const [produceSection] = React.useState(section1);
   const [meatSection] = React.useState(section2);
   const [dairySection] = React.useState(section3);
-  
+
   const [shoppingItem, setShoppingItem] = React.useState('');
   const [groceryList, setGroceryList] = React.useState([]);
   //change to axios call to get Coffee Shops
@@ -138,42 +138,42 @@ function App() {
 
   function getSectionPage(event) {
     event.preventDefault();
-    let url = "http://127.0.0.1:8000/groceryList?section=" + event.target.innerHTML;
-    if(event.target.innerHTML === "all") {
-      url = "http://127.0.0.1:8000/groceryList"
+    let url = "https://jr-grocery-list.herokuapp.com/groceryList?section=" + event.target.innerHTML;
+    if (event.target.innerHTML === "all") {
+      url = "https://jr-grocery-list.herokuapp.com/groceryList"
     }
-    
-    fetch(url, requestOptions)
-        .then(response => response.json())
-        .then((data) => {
-          setGroceryList(data)
-          //setGroceryList([...this.groceryList, data])
-          /*const json = JSON.stringify(data)
 
-          const o = JSON.parse(json)
-          for (let i = 0; i < data.length; i++) {
-            console.log(o[i].item)
-            groceryList.push(o[i].item)
-          }*/
-          
-        });
+    fetch(url, requestOptions)
+      .then(response => response.json())
+      .then((data) => {
+        setGroceryList(data)
+        //setGroceryList([...this.groceryList, data])
+        /*const json = JSON.stringify(data)
+
+        const o = JSON.parse(json)
+        for (let i = 0; i < data.length; i++) {
+          console.log(o[i].item)
+          groceryList.push(o[i].item)
+        }*/
+
+      });
   }
 
   useEffect(() => {
-    fetch("http://localhost:8000/groceryList?_sort=section", requestOptions)
-        .then(response => response.json())
-        .then((data) => {
-          setGroceryList(data)
-          //setGroceryList([...this.groceryList, data])
-          /*const json = JSON.stringify(data)
+    fetch("https://jr-grocery-list.herokuapp.com/groceryList?_sort=section", requestOptions)
+      .then(response => response.json())
+      .then((data) => {
+        setGroceryList(data)
+        //setGroceryList([...this.groceryList, data])
+        /*const json = JSON.stringify(data)
 
-          const o = JSON.parse(json)
-          for (let i = 0; i < data.length; i++) {
-            console.log(o[i].item)
-            groceryList.push(o[i].item)
-          }*/
-          
-        });
+        const o = JSON.parse(json)
+        for (let i = 0; i < data.length; i++) {
+          console.log(o[i].item)
+          groceryList.push(o[i].item)
+        }*/
+
+      });
   }, []);
 
 
@@ -189,7 +189,7 @@ function App() {
       section: section
     }
     //make post request
-    fetch('http://localhost:8000/groceryList', {
+    fetch('https://jr-grocery-list.herokuapp.com/groceryList', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -213,13 +213,13 @@ function App() {
   }
 
   function handleChange(event) {
-    if(event.target.id === 'shopNameInput') {
+    if (event.target.id === 'shopNameInput') {
       setShopName(event.target.value);
     } else if (event.target.id === 'lattePriceInput') {
       setLattePrice(event.target.value);
-    } else if(event.target.id === 'espressoPriceInput') {
+    } else if (event.target.id === 'espressoPriceInput') {
       setEspressoPrice(event.target.value);
-    } else if(event.target.id === 'shoppingItem') {
+    } else if (event.target.id === 'shoppingItem') {
       setShoppingItem(event.target.value);
     }
   }
@@ -227,40 +227,40 @@ function App() {
 
   return (
     <Container>
-    <Row>
-      <FoodItem name='salmon' id='33' section='meat' />
-    </Row>
-    
-    <div>
-      <DropdownButton id="dropdown-basic-button" title="Grocery Section">
-        <Dropdown.Item href="" onClick={getSectionPage}>all</Dropdown.Item>
-        <Dropdown.Item href="produce-section" onClick={getSectionPage}>produce</Dropdown.Item>
-        <Dropdown.Item href="dairy-section" onClick={getSectionPage}>dairy</Dropdown.Item>
-        <Dropdown.Item href="meat-section" onClick={getSectionPage}>meat</Dropdown.Item>
-        <Dropdown.Item href="misc-section" onClick={getSectionPage}>misc</Dropdown.Item>
-      </DropdownButton>
-      {Object.keys(groceryList).map(key => {
-        return <FoodItem name={groceryList[key].item} id={groceryList[key].id} section={groceryList[key].section}/>
-      })}
-      
-      {list.map((coffeeshop) => {
+      <Row>
+        <FoodItem name='salmon' id='33' section='meat' />
+      </Row>
+
+      <div>
+        <DropdownButton id="dropdown-basic-button" title="Grocery Section">
+          <Dropdown.Item href="" onClick={getSectionPage}>all</Dropdown.Item>
+          <Dropdown.Item href="produce-section" onClick={getSectionPage}>produce</Dropdown.Item>
+          <Dropdown.Item href="dairy-section" onClick={getSectionPage}>dairy</Dropdown.Item>
+          <Dropdown.Item href="meat-section" onClick={getSectionPage}>meat</Dropdown.Item>
+          <Dropdown.Item href="misc-section" onClick={getSectionPage}>misc</Dropdown.Item>
+        </DropdownButton>
+        {Object.keys(groceryList).map(key => {
+          return <FoodItem name={groceryList[key].item} id={groceryList[key].id} section={groceryList[key].section} />
+        })}
+
+        {list.map((coffeeshop) => {
           return (
-            <CoffeeShop name={coffeeshop.name} latte={coffeeshop.menu.latte} espresso={coffeeshop.menu.espresso}/>
+            <CoffeeShop name={coffeeshop.name} latte={coffeeshop.menu.latte} espresso={coffeeshop.menu.espresso} />
           )
         })}
-      <form>
-        <label>add grocery item</label>
-        <input type='text' value={shoppingItem} id='shoppingItem' onChange={handleChange}></input>
-        {/*<label>shop-name</label> <br />
+        <form>
+          <label>add grocery item</label>
+          <input type='text' value={shoppingItem} id='shoppingItem' onChange={handleChange}></input>
+          {/*<label>shop-name</label> <br />
         <input type='text' value={shopName} id='shopNameInput' onChange={handleChange}></input><br />
         <label>latte price</label><br />
         <input type='text' value={lattePrice} id='lattePriceInput' onChange={handleChange}></input><br />
         <label>espresso price</label><br />
         <input type='text' value={espressoPrice} id='espressoPriceInput' onChange={handleChange}></input><br />
         */}
-        <input type='submit' id='btnSubmit' onClick={handleAdd}></input><br />
-      </form>
-    </div>
+          <input type='submit' id='btnSubmit' onClick={handleAdd}></input><br />
+        </form>
+      </div>
     </Container>
   )
 }
