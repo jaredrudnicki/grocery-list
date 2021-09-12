@@ -31,7 +31,7 @@ const shops = [
 ]
 
 const section1 = ["apples", "bananas", "grapes", "onions", "lettuce", "spinach"]
-const section2 = ["chicken", "steak", , "pork", "brisket"]
+const section2 = ["chicken", "steak", "pork", "brisket"]
 const section3 = ["shredded cheese", "butter", "eggs", "sour cream"]
 
 
@@ -132,9 +132,9 @@ function App() {
   const [shoppingItem, setShoppingItem] = React.useState('');
   const [groceryList, setGroceryList] = React.useState([]);
   //change to axios call to get Coffee Shops
-  const [shopName, setShopName] = React.useState('');
-  const [lattePrice, setLattePrice] = React.useState('');
-  const [espressoPrice, setEspressoPrice] = React.useState('');
+  //const [shopName, setShopName] = React.useState('');
+  //const [lattePrice, setLattePrice] = React.useState('');
+  //const [espressoPrice, setEspressoPrice] = React.useState('');
 
   function getSectionPage(event) {
     event.preventDefault();
@@ -160,6 +160,13 @@ function App() {
   }
 
   useEffect(() => {
+    setList(shops);
+    var requestOptions = {
+      method: 'GET',
+      //headers: myHeaders,
+      //redirect: 'follow',
+    };
+
     fetch("https://jr-grocery-list.herokuapp.com/groceryList?_sort=section", requestOptions)
       .then(response => response.json())
       .then((data) => {
@@ -213,13 +220,13 @@ function App() {
   }
 
   function handleChange(event) {
-    if (event.target.id === 'shopNameInput') {
-      setShopName(event.target.value);
-    } else if (event.target.id === 'lattePriceInput') {
-      setLattePrice(event.target.value);
-    } else if (event.target.id === 'espressoPriceInput') {
-      setEspressoPrice(event.target.value);
-    } else if (event.target.id === 'shoppingItem') {
+    //if (event.target.id === 'shopNameInput') {
+    //  setShopName(event.target.value);
+    //} else if (event.target.id === 'lattePriceInput') {
+    //  setLattePrice(event.target.value);
+    //} else if (event.target.id === 'espressoPriceInput') {
+    //  setEspressoPrice(event.target.value);
+    if (event.target.id === 'shoppingItem') {
       setShoppingItem(event.target.value);
     }
   }
