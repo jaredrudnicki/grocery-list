@@ -103,7 +103,7 @@ function App() {
     event.preventDefault();
     let url = "https://jr-grocery-list.herokuapp.com/groceryList?section=" + event.target.innerHTML;
     if (event.target.innerHTML === "all") {
-      url = "https://jr-grocery-list.herokuapp.com/groceryList"
+      url = "https://jr-grocery-list.herokuapp.com/groceryList?_sort=section"
     }
 
     fetch(url, requestOptions)
