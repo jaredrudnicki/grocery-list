@@ -1,0 +1,56 @@
+{
+  "foodItems": [
+    {
+      "id": 1,
+      "name": "apple",
+      "section": "produce"
+    },
+    {
+      "id": 2,
+      "name": "chicken",
+      "section": "meat"
+    },
+    {
+      "id": 3,
+      "name": "cranberry",
+      "section": "canned fruit"
+    },
+    {
+      "name": "pasta",
+      "section": "italian",
+      "id": 4
+    }
+  ],
+  "groceryList": [
+    {
+      "item": "grapes",
+      "section": "produce",
+      "id": 4
+    },
+    {
+      "item": "apples",
+      "section": "produce",
+      "id": 7
+    },
+    {
+      "item": "adsadsads",
+      "section": "misc",
+      "id": 8
+    },
+    {
+      "item": "fries",
+      "section": "misc",
+      "id": 10
+    },
+    {
+      "item": "steak",
+      "section": "meat",
+      "id": 11
+    },
+    {
+      "item": "sour cream",
+      "section": "dairy",
+      "id": 12
+    }
+  ]
+}
